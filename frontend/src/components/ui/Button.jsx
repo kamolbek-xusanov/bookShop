@@ -17,7 +17,6 @@ const sizes = {
   lg: 'px-6 py-3.5 text-base gap-2',
 }
 
-// Renders a <button>, or a router <Link> when `to` is given
 export default function Button({
   variant = 'primary',
   size = 'md',

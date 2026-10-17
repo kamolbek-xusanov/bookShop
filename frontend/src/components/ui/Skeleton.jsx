@@ -4,7 +4,6 @@ export default function Skeleton({ className }) {
   return <div className={cn('animate-pulse rounded-xl bg-stone-200/80 dark:bg-stone-800/80', className)} />
 }
 
-// Placeholder shaped like a book card
 export function CardSkeleton() {
   return (
     <div className="overflow-hidden rounded-3xl border border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900">

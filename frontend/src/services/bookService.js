@@ -2,7 +2,6 @@ import api from './api'
 
 const API = '/books'
 
-// returns { books, pagination }
 export const getBooks = async ({ page = 1, limit = 9, search = '', sort } = {}) => {
   const { data } = await api.get(API, {
     params: { page, limit, ...(search ? { search } : {}), ...(sort ? { sort } : {}) },
@@ -10,9 +9,6 @@ export const getBooks = async ({ page = 1, limit = 9, search = '', sort } = {}) 
   return data
 }
 
-// Books are sent as multipart form data, because they can carry up to 5 image files.
-//   newImages    - File objects to upload
-//   removeImages - stored paths (book.images) to delete while editing
 function toFormData({ newImages = [], removeImages = [], ...fields }) {
   const form = new FormData()
 

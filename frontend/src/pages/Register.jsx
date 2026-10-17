@@ -29,7 +29,6 @@ export default function Register() {
 
   const set = (name) => (event) => setValues((current) => ({ ...current, [name]: event.target.value }))
 
-  // register, then sign the new user in right away
   const mutation = useMutation({
     mutationFn: async (payload) => {
       await registerUser(payload)

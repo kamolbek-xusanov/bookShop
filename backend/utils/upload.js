@@ -4,7 +4,7 @@ const fs = require("fs")
 const crypto = require("crypto")
 
 const MAX_IMAGES = 5
-const MAX_SIZE = 5 * 1024 * 1024 // 5 MB per image
+const MAX_SIZE = 5 * 1024 * 1024
 const UPLOAD_DIR = path.resolve(process.env.UPLOAD_DIR || path.join(__dirname, "..", "uploads"))
 const URL_PREFIX = "/uploads/"
 
@@ -20,7 +20,6 @@ const storage = multer.diskStorage({
         fs.mkdirSync(UPLOAD_DIR, { recursive: true })
         cb(null, UPLOAD_DIR)
     },
-    // random name: the original file name is never used on disk
     filename: (req, file, cb) => cb(null, crypto.randomBytes(16).toString("hex") + EXTENSIONS[file.mimetype])
 })
 
@@ -37,7 +36,6 @@ const upload = multer({
     }
 })
 
-// the content type comes from the client, so also check the first bytes of the file
 function looksLikeImage(file) {
     const buffer = Buffer.alloc(12)
     const fd = fs.openSync(file.path, "r")
@@ -58,7 +56,6 @@ function looksLikeImage(file) {
 
 const urlOf = (file) => URL_PREFIX + file.filename
 
-// deletes uploaded files (multer file objects) or stored paths like "/uploads/abc.jpg"
 function removeFiles(items = []) {
     for (const item of items) {
         const target = typeof item === "string"
@@ -74,7 +71,6 @@ const messages = {
     LIMIT_UNEXPECTED_FILE: `Ko'pi bilan ${MAX_IMAGES} ta rasm yuklash mumkin`
 }
 
-// [multer, content check]; skips requests that are not multipart (plain JSON still works)
 const uploadImages = [
     (req, res, next) => {
         upload.array("images", MAX_IMAGES)(req, res, (error) => {

@@ -34,7 +34,6 @@ export default function UserFormModal({ user, onSubmit, onClose }) {
     const age = Number(values.yosh)
     if (!age || age < 1 || age > 120) errors.yosh = t('validation.range', { min: 1, max: 120 })
     if (!EMAIL_PATTERN.test(values.email.trim())) errors.email = t('validation.email')
-    // when editing, an empty password means "keep the current one"
     if ((!isEdit || values.password) && values.password.length < 6) errors.password = t('validation.min', { count: 6 })
     return errors
   }

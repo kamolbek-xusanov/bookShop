@@ -12,7 +12,6 @@ const spines = [
   { h: 'h-36', c: '#0369a1' },
 ]
 
-// Two-column layout used by the login and register pages
 export default function AuthShell({ title, subtitle, children, footer }) {
   const { t } = useTranslation()
 

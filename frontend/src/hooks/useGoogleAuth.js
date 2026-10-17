@@ -5,7 +5,6 @@ import { googleAuth } from '../services/authService'
 import { useAuth } from './useAuth'
 import { useToast } from './useToast'
 
-// "Continue with Google": sends the Google token to the API, then logs the user in
 export function useGoogleAuth(redirectTo = '/books') {
   const { t } = useTranslation()
   const { login } = useAuth()

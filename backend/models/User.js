@@ -5,7 +5,6 @@ const userSchema = new mongoose.Schema({
     familiya: { type: String, trim: true },
     yosh: Number,
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
-    // users who sign in with Google have no password
     password: { type: String, required: function () { return !this.googleId } },
     googleId: { type: String, unique: true, sparse: true },
     avatar: String,

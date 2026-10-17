@@ -17,7 +17,6 @@ exports.sendOtp = async (req, res) => {
         throw error
     }
 
-    // the code is only sent by email, never returned in the response
     res.status(200).json({ message: "OTP jo'natildi" })
 }
 

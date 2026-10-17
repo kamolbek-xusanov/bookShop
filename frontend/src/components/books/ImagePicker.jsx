@@ -4,8 +4,7 @@ import { ImagePlus, X } from 'lucide-react'
 import { cn } from '../../utils/cn'
 import { IMAGE_TYPES, MAX_IMAGE_MB, MAX_IMAGES } from '../../utils/media'
 
-// A grid of up to 5 book images. `items` are { key, src, isNew }.
-// The first image is the book cover.
+
 export default function ImagePicker({ items, onAdd, onRemove }) {
   const { t } = useTranslation()
   const inputRef = useRef(null)

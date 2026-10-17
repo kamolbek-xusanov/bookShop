@@ -10,7 +10,6 @@ import { getErrorMessages } from '../../utils/errors'
 
 const GENRES = ['Programming', 'Fiction', 'Fantasy', 'Science', 'History', 'Business', 'Biography', 'Self-development']
 
-// Create (book = null) or edit (book = existing). The parent unmounts it when closed.
 export default function BookFormModal({ book, onSubmit, onClose }) {
   const { t } = useTranslation()
   const isEdit = Boolean(book)
@@ -22,7 +21,6 @@ export default function BookFormModal({ book, onSubmit, onClose }) {
     Janr: book?.Janr ?? '',
     sotuvdaBor: book?.sotuvdaBor ?? true,
   })
-  // images already saved on the server (can be removed) and new files chosen in this form
   const [savedImages, setSavedImages] = useState(book?.images ?? [])
   const [newImages, setNewImages] = useState([]) // [{ key, file, src }]
   const [removed, setRemoved] = useState([])
@@ -31,7 +29,6 @@ export default function BookFormModal({ book, onSubmit, onClose }) {
   const [serverErrors, setServerErrors] = useState([])
   const [submitting, setSubmitting] = useState(false)
 
-  // free the temporary preview URLs when the form closes
   useEffect(() => {
     const urls = previews.current
     return () => urls.forEach((url) => URL.revokeObjectURL(url))

@@ -1,4 +1,3 @@
-// Usage: roleMiddleware("admin") or roleMiddleware("admin", "superAdmin")
 exports.roleMiddleware = (...roles) => {
     return (req, res, next) => {
         if (!req.user) {

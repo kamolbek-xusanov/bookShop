@@ -1,9 +1,7 @@
 const { removeFiles } = require("../utils/upload")
 
-// Validates req.body with a zod schema. Unknown fields are stripped,
-// so users cannot sneak in fields like "role".
 exports.validate = (schema) => (req, res, next) => {
-    const result = schema.safeParse(req.body)
+    const result = schema.safeParse(req.body ?? {})
 
     if (!result.success) {
         removeFiles(req.files)

@@ -6,7 +6,7 @@ const isOwnerOrAdmin = (book, user) =>
 
 const escapeRegex = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
 
-// GET /books?page=1&limit=9&search=clean&sort=newest
+
 exports.getBooks = async (req, res) => {
     const page = Math.max(Number(req.query.page) || 1, 1)
     const limit = Math.min(Math.max(Number(req.query.limit) || 5, 1), 100)
@@ -46,7 +46,6 @@ exports.getBooks = async (req, res) => {
 }
 
 exports.getBookById = async (req, res) => {
-    // only expose safe user fields (never the password hash)
     const book = await Book.findById(req.params.id).populate("user", "ism familiya")
 
     if (!book) {
@@ -57,7 +56,6 @@ exports.getBookById = async (req, res) => {
 }
 
 exports.createBook = async (req, res) => {
-    // the owner is always the logged-in user, not a value sent by the client
     const images = (req.files || []).map(urlOf)
     const book = await Book.create({ ...req.body, images, user: req.user.id })
     await book.populate("user", "ism familiya")
@@ -79,7 +77,6 @@ exports.editBook = async (req, res) => {
     }
 
     const { removeImages = [], ...fields } = req.body
-    // only images that really belong to this book can be removed
     const toRemove = book.images.filter((image) => removeImages.includes(image))
     const kept = book.images.filter((image) => !toRemove.includes(image))
 
@@ -112,8 +109,6 @@ exports.deleteBook = async (req, res) => {
     res.status(200).json({ message: "O'chirildi!" })
 }
 
-// GET /books/stats            -> number of books per author
-// GET /books/stats?muallifi=X -> only for author X
 exports.countBook = async (req, res) => {
     const match = req.query.muallifi ? { muallifi: String(req.query.muallifi) } : {}
 

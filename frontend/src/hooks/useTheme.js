@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useSyncExternalStore } from 'react'
 import { applyTheme, getTheme, hasSavedTheme, prefersDark, saveTheme } from '../utils/theme'
 
-// one shared store, so every toggle on the page shows the same state
 const listeners = new Set()
 let current = null
 

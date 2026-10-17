@@ -2,7 +2,6 @@ exports.notFound = (req, res) => {
     res.status(404).json({ message: `Route topilmadi: ${req.method} ${req.originalUrl}` })
 }
 
-// Express 5 forwards errors from async handlers here automatically
 exports.errorHandler = (err, req, res, next) => {
     if (err.type === "entity.parse.failed") {
         return res.status(400).json({ message: "JSON noto'g'ri formatda" })

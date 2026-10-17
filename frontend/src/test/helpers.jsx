@@ -5,7 +5,6 @@ import App from '../App'
 import { AuthProvider } from '../context/AuthContext'
 import { ToastProvider } from '../context/ToastContext'
 
-// builds an unsigned token that looks like the ones the backend issues
 export function fakeToken(payload) {
   const encode = (value) => btoa(JSON.stringify(value)).replace(/=/g, '')
   const body = { exp: Math.floor(Date.now() / 1000) + 3600, ...payload }

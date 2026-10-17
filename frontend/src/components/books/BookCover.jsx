@@ -5,7 +5,6 @@ import { coverGradient } from '../../utils/cover'
 import { mediaUrl } from '../../utils/media'
 import { cn } from '../../utils/cn'
 
-// Cover area of a book card: the book's photos (swipe with arrows/dots) or, without photos, a colored cover
 export default function BookCover({ book, children }) {
   const { t } = useTranslation()
   const images = book.images ?? []

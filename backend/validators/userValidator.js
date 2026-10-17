@@ -16,7 +16,6 @@ const loginSchema = z.object({
     password: z.string().min(6)
 })
 
-// superAdmin can also choose the role
 const adminCreateUserSchema = registerSchema.extend({ role: role.optional() })
 const updateUserSchema = adminCreateUserSchema.partial()
 

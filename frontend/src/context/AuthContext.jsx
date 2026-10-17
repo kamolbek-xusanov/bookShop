@@ -6,7 +6,6 @@ import { decodeToken } from '../utils/jwt'
 function readStoredToken() {
   const token = localStorage.getItem('token')
 
-  // drop tokens that are broken or already expired
   if (token && !decodeToken(token)) {
     localStorage.removeItem('token')
     return null
@@ -32,7 +31,6 @@ export function AuthProvider({ children }) {
     queryClient.clear()
   }, [queryClient])
 
-  // the API client fires this when the server answers 401 for a logged-in user
   useEffect(() => {
     window.addEventListener('auth:expired', logout)
     return () => window.removeEventListener('auth:expired', logout)

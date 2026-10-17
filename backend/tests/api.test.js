@@ -1,4 +1,3 @@
-// Run with: npm test   (uses Node's built-in test runner, no database needed)
 process.env.JWT_SECRET = "test_secret"
 process.env.NODE_ENV = "test"
 
@@ -92,7 +91,6 @@ test("OTP service: too many wrong attempts invalidate the code", () => {
     assert.equal(otp.verify("limit@mail.com", code).ok, false)
 })
 
-// ---- book images ----
 const tinyPng = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==", "base64")
 
 async function postBook(files, auth = token("user")) {
@@ -150,7 +148,6 @@ test("uploaded files are removed when validation fails", async () => {
     assert.equal(after, before)
 })
 
-// ---- Google sign-in ----
 test("google sign-in: validates input and needs configuration", async () => {
     delete process.env.GOOGLE_CLIENT_ID
     assert.equal((await call("POST", "/users/google", { body: {} })).status, 400)
@@ -185,7 +182,6 @@ test("google sign-in: creates a user for a verified Google account and returns a
         assert.equal(payload.role, "user")
         assert.equal(res.data.user.password, undefined)
 
-        // an unverified Google email must not sign in
         OAuth2Client.prototype.verifyIdToken = async () => ({ getPayload: () => ({ sub: "g-2", email: "a@b.com", email_verified: false }) })
         assert.equal((await call("POST", "/users/google", { body: { credential: "x".repeat(40) } })).status, 401)
     } finally {

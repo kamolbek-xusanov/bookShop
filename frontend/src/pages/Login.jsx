@@ -26,7 +26,6 @@ export default function Login() {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
-  // go back to the page the user wanted before being sent to /login
   const redirectTo = location.state?.from?.pathname || '/books'
 
   const mutation = useMutation({

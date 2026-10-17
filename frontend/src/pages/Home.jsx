@@ -9,7 +9,6 @@ import Button from '../components/ui/Button'
 import EmptyState from '../components/ui/EmptyState'
 import { CardSkeleton } from '../components/ui/Skeleton'
 
-// Decorative stack of books for the hero (pure CSS, no images)
 const heroBooks = [
   { colors: ['#0f766e', '#134e4a'], style: { '--r': '-8deg', left: '0%', top: '12%' }, delay: '0s' },
   { colors: ['#b45309', '#78350f'], style: { '--r': '5deg', left: '34%', top: '0%' }, delay: '1.2s' },

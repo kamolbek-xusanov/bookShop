@@ -2,7 +2,7 @@ import { useId } from 'react'
 import { cn } from '../../utils/cn'
 
 const inputClasses =
-  'w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-stone-900 placeholder:text-stone-400  dark:bg-stone-900 dark:text-stone-100' +
+  'w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-stone-900 placeholder:text-stone-400 dark:bg-stone-900 dark:text-stone-100 ' +
   'transition outline-none focus:ring-4'
 
 function stateClasses(error) {
@@ -29,7 +29,6 @@ function Wrapper({ id, label, error, hint, children }) {
   )
 }
 
-// Text input with an optional leading icon and a trailing slot (e.g. show/hide password)
 export default function Field({ label, error, hint, icon: Icon, trailing, className, ...props }) {
   const id = useId()
 
@@ -67,7 +66,6 @@ export function SelectField({ label, error, hint, className, children, ...props 
   )
 }
 
-// On/off switch with a label
 export function Switch({ checked, onChange, label, hint }) {
   return (
     <label className="flex cursor-pointer items-center justify-between gap-4 rounded-xl border border-stone-300 bg-white px-3.5 py-3 hover:border-stone-400 dark:border-stone-700 dark:bg-stone-900 dark:hover:border-stone-600">

@@ -3,7 +3,6 @@ import { Moon, Sun } from 'lucide-react'
 import { useTheme } from '../../hooks/useTheme'
 import { cn } from '../../utils/cn'
 
-// Switches between the light and the dark theme
 export default function ThemeToggle({ className }) {
   const { t } = useTranslation()
   const { isDark, toggle } = useTheme()

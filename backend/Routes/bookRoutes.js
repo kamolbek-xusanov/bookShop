@@ -12,7 +12,6 @@ const { otpEmailSchema, otpVerifySchema } = require("../validators/userValidator
 
 router.get("/books", bookController.getBooks)
 
-// fixed paths must come before "/books/:id"
 router.get("/books/stats", authMiddleware, roleMiddleware("admin", "superAdmin"), bookController.countBook)
 
 router.post("/books/send", validate(otpEmailSchema), otpController.sendOtp)

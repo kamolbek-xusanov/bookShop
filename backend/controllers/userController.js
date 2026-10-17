@@ -26,8 +26,6 @@ exports.loginUser = async (req, res) => {
     const { email, password } = req.body
     const user = await User.findOne({ email })
 
-    // same message for "no such user" and "wrong password" so attackers cannot find out which emails exist
-    // Google-only accounts have no password, so they can not log in this way
     const isMatch = user?.password ? await bcrypt.compare(password, user.password) : false
 
     if (!isMatch) {
@@ -43,8 +41,6 @@ exports.loginUser = async (req, res) => {
 
 const publicUser = (user) => ({ id: user._id, ism: user.ism, familiya: user.familiya, email: user.email, role: user.role, avatar: user.avatar })
 
-// POST /users/google  { credential }  -> Google ID token from "Sign in with Google"
-// Verifies the token with Google, then signs in (or registers) the user.
 exports.googleAuth = async (req, res) => {
     const clientId = process.env.GOOGLE_CLIENT_ID
     if (!clientId) {
@@ -77,7 +73,6 @@ exports.googleAuth = async (req, res) => {
         })
         isNew = true
     } else if (!user.googleId) {
-        // an account with this verified email already exists: link it to Google
         user.googleId = payload.sub
         if (!user.avatar) user.avatar = payload.picture
         await user.save()
@@ -125,7 +120,6 @@ exports.createUsers = async (req, res) => {
 exports.updateUser = async (req, res) => {
     const data = { ...req.body }
 
-    // never store a plain-text password
     if (data.password) {
         data.password = await bcrypt.hash(data.password, 10)
     }

@@ -35,8 +35,22 @@ export default function Navbar() {
   const initial = (user?.ism || '?').charAt(0).toUpperCase()
 
   return (
-    <header className="sticky top-0 z-40 border-b border-stone-200/80 bg-paper/85 backdrop-blur-lg dark:border-stone-800/80 dark:bg-stone-950/85">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+    <header className="sticky top-3 z-40 mx-auto mt-3 w-[calc(100%-1.5rem)] max-w-[77rem] sm:top-4 sm:mt-4 sm:w-[calc(100%-3rem)]">
+      {/* amber glow under the bar, so it stands out in both themes */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-10 -bottom-2 -z-10 h-8 rounded-full bg-amber-400/40 blur-2xl dark:bg-amber-500/25"
+      />
+
+      {/* floating pill */}
+      <div
+        className={cn(
+          'border border-stone-300/80 bg-white/80 shadow-xl shadow-stone-900/10 ring-1 ring-white/60 backdrop-blur-xl',
+          'dark:border-white/10 dark:bg-stone-900/75 dark:shadow-black/60 dark:ring-white/5',
+          open ? 'rounded-3xl' : 'rounded-full'
+        )}
+      >
+      <div className="flex h-14 items-center justify-between gap-4 pr-2.5 pl-3 sm:pl-4">
         <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
           <span className="flex size-9 items-center justify-center rounded-xl bg-amber-500 text-stone-950 shadow-sm shadow-amber-500/40">
             <BookOpen className="size-5" />
@@ -97,7 +111,7 @@ export default function Navbar() {
 
       {/* mobile */}
       {open && (
-        <div className="animate-fade-in border-t border-stone-200 bg-paper px-4 pt-3 pb-6 md:hidden dark:border-stone-800 dark:bg-stone-950">
+        <div className="animate-fade-in border-t border-stone-200/80 px-4 pt-3 pb-5 md:hidden dark:border-white/10">
           <nav className="flex flex-col gap-1">
             {links.map((link) => (
               <NavLink
@@ -144,6 +158,7 @@ export default function Navbar() {
           </div>
         </div>
       )}
+      </div>
     </header>
   )
 }

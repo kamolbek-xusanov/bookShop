@@ -1,5 +1,3 @@
-// Usage: npm run create-admin -- <email> <password> [name]
-// Creates a superAdmin, or promotes an existing user with that email.
 require("dotenv").config()
 const bcrypt = require("bcrypt")
 const mongoose = require("mongoose")

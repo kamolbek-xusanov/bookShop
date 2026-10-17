@@ -7,7 +7,6 @@ const SCRIPT_SRC = 'https://accounts.google.com/gsi/client'
 
 let scriptPromise
 
-// loads Google's sign-in script once for the whole app
 function loadGoogleScript() {
   if (window.google?.accounts?.id) return Promise.resolve()
 
@@ -26,8 +25,6 @@ function loadGoogleScript() {
   return scriptPromise
 }
 
-// "Continue with Google" button (Google Identity Services).
-// onCredential receives the Google ID token; the backend verifies it and signs the user in.
 export default function GoogleButton({ onCredential, text = 'continue_with' }) {
   const { t, i18n } = useTranslation()
   const { isDark } = useTheme()
@@ -73,7 +70,6 @@ export default function GoogleButton({ onCredential, text = 'continue_with' }) {
   }, [isDark, text, i18n.resolvedLanguage])
 
   if (!CLIENT_ID) {
-    // no client ID set up: tell the developer, hide the button from real visitors
     return import.meta.env.DEV ? (
       <p className="rounded-xl border border-dashed border-stone-300 px-3 py-2 text-center text-xs text-stone-500 dark:border-stone-700 dark:text-stone-400">
         {t('auth.googleNotConfigured')}

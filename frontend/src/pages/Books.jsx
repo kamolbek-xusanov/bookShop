@@ -63,7 +63,6 @@ export default function Books() {
     },
   })
 
-  // owners can change their own books; admins can change all of them
   const canManage = (book) =>
     isAuthenticated && (hasRole('admin', 'superAdmin') || String(book.user?._id) === user.id)
 

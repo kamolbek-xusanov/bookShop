@@ -18,7 +18,6 @@ i18n.use(initReactI18next).init({
   interpolation: { escapeValue: false },
 })
 
-// keep <html lang="..."> in sync with the selected language
 document.documentElement.lang = i18n.language
 i18n.on('languageChanged', (lang) => {
   document.documentElement.lang = lang

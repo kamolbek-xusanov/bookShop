@@ -23,10 +23,9 @@ export default function Users() {
   const { user: me, hasRole } = useAuth()
 
   const [search, setSearch] = useState('')
-  const [modal, setModal] = useState(null) // null | { user: null | user }
+  const [modal, setModal] = useState(null) 
   const [toDelete, setToDelete] = useState(null)
 
-  // admins can look at users, only a superAdmin can change them
   const canManage = hasRole('superAdmin')
 
   const { data: users, isLoading, isError, refetch } = useQuery({

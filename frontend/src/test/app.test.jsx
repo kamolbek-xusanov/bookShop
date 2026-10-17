@@ -15,7 +15,6 @@ vi.mock('../services/bookService', () => ({
   updateBook: vi.fn(),
   removeBook: vi.fn(),
 }))
-// the real button loads Google's script; here it just hands over a fake credential
 vi.mock('../components/auth/GoogleButton', () => ({
   default: ({ onCredential }) => (
     <button type="button" onClick={() => onCredential('google-credential')}>
@@ -78,7 +77,6 @@ describe('login', () => {
     expect(await screen.findByRole('heading', { name: 'Books' })).toBeInTheDocument()
     expect(loginUser).toHaveBeenCalledWith({ email: 'k@test.uz', password: 'secret123' })
     expect(localStorage.getItem('token')).toBe(token)
-    // navbar switched to the logged-in state
     expect(screen.getAllByRole('link', { name: /Kamol/ }).length).toBeGreaterThan(0)
   })
 
@@ -103,7 +101,6 @@ describe('login', () => {
     renderApp('/profile')
     const user = userEvent.setup()
 
-    // not logged in: /profile redirects to the login page
     await user.type(await screen.findByLabelText('Email'), 'k@test.uz')
     await user.type(screen.getByLabelText('Password'), 'secret123')
     await user.click(screen.getByRole('button', { name: 'Log in' }))
@@ -233,7 +230,6 @@ describe('books', () => {
     await user.click(await screen.findByRole('button', { name: 'Add book' }))
     const dialog = await screen.findByRole('dialog')
 
-    // too-short values are rejected on the client
     await user.type(within(dialog).getByLabelText('Title'), 'abc')
     await user.click(within(dialog).getByRole('button', { name: 'Add book' }))
     expect(createBook).not.toHaveBeenCalled()
