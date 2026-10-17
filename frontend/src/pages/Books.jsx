@@ -32,6 +32,7 @@ export default function Books() {
   const [toDelete, setToDelete] = useState(null)
 
   const debouncedSearch = useDebounce(search)
+  console.log({ search, debouncedSearch })
 
   const { data, isLoading, isError, refetch, isPlaceholderData } = useQuery({
     queryKey: ['books', { page, search: debouncedSearch }],
