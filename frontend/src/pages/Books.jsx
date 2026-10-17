@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import {  useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { BookOpen, Plus } from 'lucide-react'
 import { createBook, getBooks, removeBook, updateBook } from '../services/bookService'
@@ -35,8 +35,7 @@ export default function Books() {
 
   const { data, isLoading, isError, refetch, isPlaceholderData } = useQuery({
     queryKey: ['books', { page, search: debouncedSearch }],
-    queryFn: () => getBooks({ page, limit: PAGE_SIZE, search: debouncedSearch }),
-    placeholderData: keepPreviousData,
+    queryFn: () => getBooks({ page, limit: PAGE_SIZE, search: debouncedSearch })
   })
 
   const saveMutation = useMutation({
