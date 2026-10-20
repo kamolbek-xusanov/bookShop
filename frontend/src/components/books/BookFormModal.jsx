@@ -20,6 +20,10 @@ export default function BookFormModal({ book, onSubmit, onClose }) {
     sahifasi: book?.sahifasi ?? '',
     Janr: book?.Janr ?? '',
     sotuvdaBor: book?.sotuvdaBor ?? true,
+    tavsif: book?.tavsif ?? '',
+    tili: book?.tili ?? '',
+    nashrYili: book?.nashrYili ?? '',
+    narxi: book?.narxi ?? ''
   })
   const [savedImages, setSavedImages] = useState(book?.images ?? [])
   const [newImages, setNewImages] = useState([]) // [{ key, file, src }]
@@ -88,6 +92,10 @@ export default function BookFormModal({ book, onSubmit, onClose }) {
         sotuvdaBor: values.sotuvdaBor,
         newImages: newImages.map((image) => image.file),
         removeImages: removed,
+        tavsif: values.tavsif.trim(),
+        tili: values.tili.trim(),
+        nashrYili: values.nashrYili === '' ? undefined : Number(values.nashrYili),
+        narxi: values.narxi === '' ? undefined : Number(values.narxi),
       })
     } catch (error) {
       setServerErrors(getErrorMessages(error, t))
@@ -129,6 +137,40 @@ export default function BookFormModal({ book, onSubmit, onClose }) {
             ))}
           </datalist>
         </div>
+
+
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Field
+            label="Kitob tavsifi"
+            value={values.tavsif}
+            onChange={set('tavsif')}
+          />
+
+          <Field
+            label="Kitob tili"
+            value={values.tili}
+            onChange={set('tili')}
+          />
+
+          <Field
+            label="Nashr yili"
+            type="number"
+            min="1000"
+            max="2100"
+            value={values.nashrYili}
+            onChange={set('nashrYili')}
+          />
+
+          <Field
+            label="Narxi (so'm)"
+            type="number"
+            min="0"
+            value={values.narxi}
+            onChange={set('narxi')}
+          />
+        </div>
+
 
         <ImagePicker items={imageItems} onAdd={addImages} onRemove={removeImage} />
 

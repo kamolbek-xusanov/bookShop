@@ -3,14 +3,17 @@ import { FileText, Pencil, Trash2, UserRound } from 'lucide-react'
 import BookCover from './BookCover'
 import Badge from '../ui/Badge'
 import Button from '../ui/Button'
+import { useNavigate } from 'react-router-dom'
 
 export default function BookCard({ book, canManage, onEdit, onDelete }) {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   const owner = book.user ? [book.user.ism, book.user.familiya].filter(Boolean).join(' ') : null
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-stone-900/10 dark:border-stone-800 dark:bg-stone-900">
+    <article onClick={() => navigate(`/books/${book._id}`)}
+      className="group flex cursor-pointer flex-col overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-stone-900/10 dark:border-stone-800 dark:bg-stone-900">
       <BookCover book={book}>
         <div className="relative flex items-start justify-between gap-2 pl-3">
           {book.Janr ? <Badge tone="glass">{book.Janr}</Badge> : <span />}
@@ -35,23 +38,48 @@ export default function BookCard({ book, canManage, onEdit, onDelete }) {
             <dt className="sr-only">{t('books.ownerLabel')}</dt>
             <dd>{owner || t('books.noOwner')}</dd>
           </div>
+          {book.narxi != null && (
+            <div className="flex items-center gap-1.5 font-semibold text-stone-900 dark:text-stone-100">
+              {Number(book.narxi).toLocaleString('uz-UZ')} so'm
+            </div>
+          )}
+          {book.nashrYili && (
+            <div className="flex items-center gap-1.5">{book.nashrYili}-yil</div>
+          )}
         </dl>
+        {book.tavsif && (
+          <p className="mt-3 line-clamp-2 text-sm text-stone-500 dark:text-stone-400">{book.tavsif}</p>
+        )}
 
         {canManage && (
           <div className="mt-5 flex gap-2 border-t border-stone-100 pt-4 dark:border-stone-800">
-            <Button variant="secondary" size="sm" icon={Pencil} onClick={() => onEdit(book)} className="flex-1">
+            <Button
+              variant="secondary"
+              size="sm"
+              icon={Pencil}
+              onClick={(e) => {
+                e.stopPropagation()
+                onEdit(book)
+              }}
+              className="flex-1"
+            >
               {t('common.edit')}
             </Button>
+
             <Button
               variant="ghost"
               size="sm"
               icon={Trash2}
-              onClick={() => onDelete(book)}
+              onClick={(e) => {
+                e.stopPropagation()
+                onDelete(book)
+              }}
               className="text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/40"
               aria-label={`${t('common.delete')}: ${book.nomi}`}
             >
               {t('common.delete')}
             </Button>
+
           </div>
         )}
       </div>

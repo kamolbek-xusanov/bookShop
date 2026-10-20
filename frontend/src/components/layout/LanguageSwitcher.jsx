@@ -15,8 +15,10 @@ export default function LanguageSwitcher({ className }) {
           onClick={() => i18n.changeLanguage(lang)}
           aria-pressed={i18n.resolvedLanguage === lang}
           className={cn(
-            'cursor-pointer rounded-full px-3 py-1 text-xs font-bold uppercase transition',
-            i18n.resolvedLanguage === lang ? 'bg-stone-900 text-white shadow dark:bg-stone-100 dark:text-stone-900' : 'text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100'
+            'cursor-pointer rounded-full px-3 py-1 text-xs font-bold uppercase transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md active:scale-95',
+            i18n.resolvedLanguage === lang
+              ? 'bg-stone-900 text-white shadow dark:bg-stone-100 dark:text-stone-900'
+              : 'text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100'
           )}
         >
           {lang}

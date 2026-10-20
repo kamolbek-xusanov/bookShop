@@ -56,8 +56,15 @@ exports.getBookById = async (req, res) => {
 }
 
 exports.createBook = async (req, res) => {
+    console.log("BACKEND QABUL QILDI:", req.body)
+
     const images = (req.files || []).map(urlOf)
-    const book = await Book.create({ ...req.body, images, user: req.user.id })
+    const book = await Book.create({
+        ...req.body,
+        images,
+        user: req.user.id,
+    })
+
     await book.populate("user", "ism familiya")
     res.status(201).json(book)
 }

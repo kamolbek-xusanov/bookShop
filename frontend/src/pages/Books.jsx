@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {  useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { BookOpen, Plus } from 'lucide-react'
 import { createBook, getBooks, removeBook, updateBook } from '../services/bookService'
@@ -17,6 +17,7 @@ import PageHeader from '../components/ui/PageHeader'
 import Pagination from '../components/ui/Pagination'
 import SearchInput from '../components/ui/SearchInput'
 import { CardSkeleton } from '../components/ui/Skeleton'
+import { useSearchParams } from 'react-router-dom'
 
 const PAGE_SIZE = 9
 
@@ -26,10 +27,23 @@ export default function Books() {
   const queryClient = useQueryClient()
   const { user, isAuthenticated, hasRole } = useAuth()
 
-  const [search, setSearch] = useState('')
-  const [page, setPage] = useState(1)
-  const [modal, setModal] = useState(null) // null | { book: null | book }
+  const [searchParams, setSearchParams] = useSearchParams()
+  const page = Math.max(Number(searchParams.get('page')) || 1, 1)
+  const search = searchParams.get('q') || ''
+
+  function updateParams(next, replace = false) {
+    const params = new URLSearchParams(searchParams)
+    for (const [key, value] of Object.entries(next)) {
+      if (value) params.set(key, value)
+      else params.delete(key)
+    }
+    setSearchParams(params, { replace })
+  }
+
+  const setPage = (value) => updateParams({ page: value > 1 ? String(value) : '' })
+  const [modal, setModal] = useState(null)
   const [toDelete, setToDelete] = useState(null)
+
 
   const debouncedSearch = useDebounce(search)
 
@@ -42,6 +56,7 @@ export default function Books() {
     mutationFn: (values) => (modal.book ? updateBook({ id: modal.book._id, book: values }) : createBook(values)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['books'] })
+      queryClient.invalidateQueries({ queryKey: ['book'] })
       toast.success(modal.book ? t('books.updated') : t('books.created'))
       setModal(null)
     },
@@ -76,8 +91,7 @@ export default function Books() {
   )
 
   function handleSearch(value) {
-    setSearch(value)
-    setPage(1)
+    updateParams({ q: value, page: '' }, true)
   }
 
   return (

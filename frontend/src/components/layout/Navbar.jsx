@@ -28,8 +28,10 @@ export default function Navbar() {
 
   const linkClasses = ({ isActive }) =>
     cn(
-      'rounded-full px-4 py-2 text-sm font-semibold transition',
-      isActive ? 'bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900' : 'text-stone-600 hover:bg-stone-200/70 hover:text-stone-900 dark:text-stone-400 dark:hover:bg-stone-800/70 dark:hover:text-stone-100'
+      'rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 ease-out hover:-translate-y-0.5 active:scale-95',
+      isActive
+  ? 'bg-stone-900 text-white shadow-md shadow-stone-900/10 dark:bg-stone-100 dark:text-stone-900 dark:shadow-black/20'
+  : 'text-stone-600 hover:bg-stone-200/70 hover:text-stone-900 dark:text-stone-400 dark:hover:bg-stone-800/70 dark:hover:text-stone-100'
     )
 
   const initial = (user?.ism || '?').charAt(0).toUpperCase()
