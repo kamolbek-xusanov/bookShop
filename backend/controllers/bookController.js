@@ -1,5 +1,5 @@
 const Book = require("../models/Book")
-const { removeFiles, urlOf, MAX_IMAGES } = require("../utils/upload")
+const { removeFiles, saveImages, MAX_IMAGES } = require("../utils/upload")
 
 const isOwnerOrAdmin = (book, user) =>
     String(book.user?._id || book.user) === String(user.id) || ["admin", "superAdmin"].includes(user.role)
@@ -58,7 +58,7 @@ exports.getBookById = async (req, res) => {
 exports.createBook = async (req, res) => {
     console.log("BACKEND QABUL QILDI:", req.body)
 
-    const images = (req.files || []).map(urlOf)
+    const images = await saveImages(req.files || [])
     const book = await Book.create({
         ...req.body,
         images,
@@ -93,7 +93,7 @@ exports.editBook = async (req, res) => {
     }
 
     Object.assign(book, fields)
-    book.images = [...kept, ...uploaded.map(urlOf)]
+    book.images = [...kept, ...(await saveImages(uploaded))]
     await book.save()
     removeFiles(toRemove)
     await book.populate("user", "ism familiya")

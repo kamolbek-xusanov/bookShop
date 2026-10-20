@@ -3,7 +3,7 @@ const express = require("express")
 const cors = require("cors")
 const bookRoutes = require("./Routes/bookRoutes")
 const userRoutes = require("./Routes/userRoutes")
-const { UPLOAD_DIR } = require("./utils/upload")
+const { UPLOAD_DIR, serveImage } = require("./utils/upload")
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware")
 
 const app = express()
@@ -11,6 +11,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+app.get("/uploads/:id", serveImage)
 app.use("/uploads", express.static(UPLOAD_DIR, { maxAge: "7d", setHeaders: (res) => res.setHeader("X-Content-Type-Options", "nosniff") }))
 
 app.get("/", (req, res) => {
