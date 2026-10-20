@@ -77,7 +77,8 @@
     "deleteText": "«{{name}}» будет удалена навсегда. Это действие нельзя отменить.",
     "pages": "{{count}} стр.",
     "ownerLabel": "Добавил",
-    "noOwner": "Неизвестно"
+    "noOwner": "Неизвестно",
+       "editedAt": "Tahrirlangan"
   },
   "bookForm": {
     "addTitle": "Новая книга",

@@ -1,13 +1,16 @@
 import { useTranslation } from 'react-i18next'
-import { FileText, Pencil, Trash2, UserRound } from 'lucide-react'
+import { Clock, FileText, Pencil, Trash2, UserRound } from 'lucide-react'
+import { formatDateTime, wasEdited } from '../../utils/data'
 import BookCover from './BookCover'
 import Badge from '../ui/Badge'
 import Button from '../ui/Button'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
 
 export default function BookCard({ book, canManage, onEdit, onDelete }) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const navigate = useNavigate()
+  const { hasRole } = useAuth()
 
   const owner = book.user ? [book.user.ism, book.user.familiya].filter(Boolean).join(' ') : null
 
@@ -38,17 +41,13 @@ export default function BookCard({ book, canManage, onEdit, onDelete }) {
             <dt className="sr-only">{t('books.ownerLabel')}</dt>
             <dd>{owner || t('books.noOwner')}</dd>
           </div>
-          {book.narxi != null && (
-            <div className="flex items-center gap-1.5 font-semibold text-stone-900 dark:text-stone-100">
-              {Number(book.narxi).toLocaleString('uz-UZ')} so'm
-            </div>
-          )}
-          {book.nashrYili && (
-            <div className="flex items-center gap-1.5">{book.nashrYili}-yil</div>
-          )}
         </dl>
-        {book.tavsif && (
-          <p className="mt-3 line-clamp-2 text-sm text-stone-500 dark:text-stone-400">{book.tavsif}</p>
+
+        {hasRole('admin', 'superAdmin') && wasEdited(book) && (
+          <p className="mt-3 flex items-center gap-1.5 text-xs text-stone-500 dark:text-stone-400">
+            <Clock className="size-3.5" />
+            {t('books.editedAt')}: {formatDateTime(book.updatedAt, i18n.resolvedLanguage)}
+          </p>
         )}
 
         {canManage && (

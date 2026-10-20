@@ -77,7 +77,8 @@
     "deleteText": "“{{name}}” butunlay o'chiriladi. Buni ortga qaytarib bo'lmaydi.",
     "pages": "{{count}} bet",
     "ownerLabel": "Qo'shgan",
-    "noOwner": "Noma'lum"
+    "noOwner": "Noma'lum",
+       "editedAt": "Tahrirlangan"
   },
   "bookForm": {
     "addTitle": "Yangi kitob qo'shish",
