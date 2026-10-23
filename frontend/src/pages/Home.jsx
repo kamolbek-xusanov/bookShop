@@ -58,9 +58,8 @@ export default function Home() {
     <>
       {/* hero */}
       <section className="relative overflow-hidden bg-stone-950 text-white">
-        <div className="pointer-events-none absolute -top-32 left-1/4 size-136 rounded-full bg-amber-500/20 blur-3xl" />
-        <div className="pointer-events-none absolute -right-20 bottom-0 size-120 rounded-full bg-indigo-500/20 blur-3xl" />
-
+        <div className="pointer-events-none absolute -top-32 left-1/4 size-136 rounded-full bg-[radial-gradient(closest-side,rgba(245,158,11,0.28),transparent)]" />
+        <div className="pointer-events-none absolute -right-20 bottom-0 size-120 rounded-full bg-[radial-gradient(closest-side,rgba(99,102,241,0.28),transparent)]" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 pt-20 pb-24 sm:px-6 lg:grid-cols-2 lg:pt-28">
           <div className="animate-fade-up">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-amber-200 ring-1 ring-white/15">
@@ -178,8 +177,7 @@ export default function Home() {
       {/* call to action */}
       <section className="mx-auto w-full max-w-7xl px-4 pt-24 sm:px-6">
         <div className="relative overflow-hidden rounded-3xl bg-stone-900 px-8 py-14 text-center text-white sm:px-16 dark:bg-stone-800">
-          <div className="pointer-events-none absolute -top-20 left-1/2 size-80 -translate-x-1/2 rounded-full bg-amber-500/30 blur-3xl" />
-          <div className="relative">
+          <div className="pointer-events-none absolute -top-20 left-1/2 size-80 -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(245,158,11,0.35),transparent)]" />         <div className="relative">
             <h2 className="mx-auto max-w-2xl font-display text-3xl font-bold sm:text-4xl">{t('home.ctaTitle')}</h2>
             <p className="mx-auto mt-4 max-w-xl text-stone-300">{t('home.ctaText')}</p>
             <div className="mt-8 flex justify-center">

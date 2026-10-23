@@ -18,9 +18,8 @@ export default function AuthShell({ title, subtitle, children, footer }) {
   return (
     <div className="grid flex-1 lg:grid-cols-2">
       <aside className="relative hidden flex-col justify-between overflow-hidden bg-stone-950 p-12 text-white lg:flex">
-        <div className="pointer-events-none absolute -top-24 -left-24 size-96 rounded-full bg-amber-500/25 blur-3xl" />
-        <div className="pointer-events-none absolute -right-24 bottom-0 size-96 rounded-full bg-indigo-500/20 blur-3xl" />
-
+        <div className="pointer-events-none absolute -top-24 -left-24 size-96 rounded-full bg-[radial-gradient(closest-side,rgba(245,158,11,0.3),transparent)]" />
+        <div className="pointer-events-none absolute -right-24 bottom-0 size-96 rounded-full bg-[radial-gradient(closest-side,rgba(99,102,241,0.25),transparent)]" />
         <Link to="/" className="relative flex items-center gap-2.5">
           <span className="flex size-9 items-center justify-center rounded-xl bg-amber-500 text-stone-950">
             <BookOpen className="size-5" />
