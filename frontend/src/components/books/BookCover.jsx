@@ -55,7 +55,7 @@ export default function BookCover({ book, children }) {
             type="button"
             onClick={go(1)}
             aria-label={t('images.next')}
-            className="absolute top-1/2 right-2 flex size-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white/85 text-stone-900 opacity-0 shadow transition group-hover/cover:opacity-100 focus-visible:opacity-100"
+            className="absolute top-1/2 right-2 flex size-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white/85 text-stone-900 shadow transition pointer-fine:opacity-0 pointer-fine:group-hover/cover:opacity-100 pointer-fine:focus-visible:opacity-100"
           >
             <ChevronRight className="size-5" />
           </button>

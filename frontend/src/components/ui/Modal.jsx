@@ -32,7 +32,7 @@ export default function Modal({ open, onClose, title, description, size = 'md', 
         aria-modal="true"
         aria-label={title}
         className={cn(
-          'relative max-h-[92vh] w-full animate-pop overflow-y-auto rounded-t-3xl bg-white p-6 shadow-2xl sm:rounded-3xl sm:p-8 dark:bg-stone-900',
+          'relative max-h-[92dvh] overscroll-contain w-full animate-pop overflow-y-auto rounded-t-3xl bg-white p-5 pb-8 shadow-2xl sm:rounded-3xl sm:p-8 dark:bg-stone-900',
           widths[size]
         )}
       >

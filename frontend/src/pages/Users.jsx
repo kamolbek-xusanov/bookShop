@@ -23,7 +23,7 @@ export default function Users() {
   const { user: me, hasRole } = useAuth()
 
   const [search, setSearch] = useState('')
-  const [modal, setModal] = useState(null) 
+  const [modal, setModal] = useState(null)
   const [toDelete, setToDelete] = useState(null)
 
   const canManage = hasRole('superAdmin')
@@ -61,7 +61,7 @@ export default function Users() {
   )
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6">
+    <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-12">
       <PageHeader
         title={t('users.title')}
         subtitle={canManage ? t('users.subtitle') : t('users.readOnly')}
@@ -74,7 +74,7 @@ export default function Users() {
         }
       />
 
-      <div className="mt-10">
+      <div className="mt-8 sm:mt-10">
         <SearchInput value={search} onChange={setSearch} placeholder={t('users.searchPlaceholder')} />
       </div>
 
@@ -99,8 +99,8 @@ export default function Users() {
 
         {visible.length > 0 && (
           <div className="overflow-x-auto rounded-3xl border border-stone-200 bg-white shadow-sm dark:border-stone-800 dark:bg-stone-900">
-            <table className="w-full min-w-160 text-left text-sm">
-              <thead className="border-b border-stone-200 bg-stone-50 text-xs font-semibold tracking-wide text-stone-500 uppercase dark:border-stone-800 dark:bg-stone-900 dark:text-stone-400">
+            <table className="w-full text-left text-sm max-md:block md:min-w-160">
+              <thead className="border-b border-stone-200 bg-stone-50 text-xs font-semibold tracking-wide text-stone-500 uppercase max-md:hidden dark:border-stone-800 dark:bg-stone-900 dark:text-stone-400">
                 <tr>
                   <th className="px-6 py-4">{t('users.colUser')}</th>
                   <th className="px-6 py-4">{t('users.colAge')}</th>
@@ -108,16 +108,19 @@ export default function Users() {
                   {canManage && <th className="px-6 py-4 text-right">{t('users.colActions')}</th>}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-stone-100 dark:divide-stone-800">
+              <tbody className="divide-y divide-stone-100 max-md:block dark:divide-stone-800">
                 {visible.map((person) => (
-                  <tr key={person._id} className="transition hover:bg-stone-50/70 dark:hover:bg-stone-800/50">
-                    <td className="px-6 py-4">
+                  <tr
+                    key={person._id}
+                    className="transition hover:bg-stone-50/70 max-md:grid max-md:grid-cols-2 max-md:items-center max-md:gap-3 max-md:p-4 dark:hover:bg-stone-800/50"
+                  >
+                    <td className="px-6 py-4 max-md:order-1 max-md:col-span-2 max-md:p-0">
                       <div className="flex items-center gap-3">
                         <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-stone-900 font-bold text-white dark:bg-stone-100 dark:text-stone-900">
                           {person.ism.charAt(0).toUpperCase()}
                         </span>
                         <div className="min-w-0">
-                          <p className="font-semibold text-stone-900 dark:text-stone-100">
+                          <p className="font-semibold wrap-break-words text-stone-900 dark:text-stone-100">
                             {[person.ism, person.familiya].filter(Boolean).join(' ')}
                             {person._id === me.id && (
                               <span className="ml-2 text-xs font-medium text-amber-700 dark:text-amber-400">({t('common.you')})</span>
@@ -127,13 +130,16 @@ export default function Users() {
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-stone-600 tabular-nums dark:text-stone-400">{person.yosh ?? '—'}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 text-stone-600 tabular-nums max-md:order-3 max-md:p-0 max-md:text-right dark:text-stone-400">
+                      <span className="md:hidden">{t('users.colAge')}: </span>
+                      {person.yosh ?? '—'}
+                    </td>
+                    <td className="px-6 py-4 max-md:order-2 max-md:p-0">
                       <Badge tone={roleTone(person.role)}>{t(`roles.${person.role}`)}</Badge>
                     </td>
                     {canManage && (
-                      <td className="px-6 py-4">
-                        <div className="flex justify-end gap-2">
+                      <td className="px-6 py-4 max-md:order-4 max-md:col-span-2 max-md:p-0">
+                        <div className="flex justify-end gap-2 max-md:*:flex-1">
                           <Button
                             variant="secondary"
                             size="sm"

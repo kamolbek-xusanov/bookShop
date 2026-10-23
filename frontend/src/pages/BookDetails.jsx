@@ -19,7 +19,7 @@ function Gallery({ book }) {
   if (images.length === 0) {
     return (
       <div
-        className="relative flex aspect-[3/4] items-center justify-center overflow-hidden rounded-3xl"
+        className="relative mx-auto flex aspect-3/4 w-full max-w-xs items-center justify-center overflow-hidden rounded-3xl sm:max-w-sm md:max-w-none"
         style={{ background: coverGradient(book.nomi) }}
       >
         <span className="font-display text-[10rem] leading-none font-bold text-white/20 select-none">
@@ -30,8 +30,8 @@ function Gallery({ book }) {
   }
 
   return (
-    <div>
-      <div className="aspect-[3/4] overflow-hidden rounded-3xl bg-stone-200 dark:bg-stone-800">
+    <div className="mx-auto w-full max-w-xs sm:max-w-sm md:max-w-none">
+      <div className="aspect-3/4 overflow-hidden rounded-3xl bg-stone-200 dark:bg-stone-800">
         <img
           key={images[index]}
           src={mediaUrl(images[index])}
@@ -41,7 +41,7 @@ function Gallery({ book }) {
       </div>
 
       {images.length > 1 && (
-        <div className="mt-3 flex gap-2">
+        <div className="mt-3 flex flex-wrap gap-2">
           {images.map((image, i) => (
             <button
               key={image}
@@ -95,7 +95,7 @@ function Similar({ book }) {
             className="group overflow-hidden rounded-2xl border border-stone-200 bg-white transition hover:-translate-y-1 hover:shadow-lg dark:border-stone-800 dark:bg-stone-900"
           >
             <div
-              className="aspect-[3/4] bg-cover bg-center"
+              className="aspect-3/4 bg-cover bg-center"
               style={
                 item.images?.[0]
                   ? { backgroundImage: `url(${mediaUrl(item.images[0])})` }
@@ -143,19 +143,19 @@ export default function BookDetails() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
+    <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
       <button
         type="button"
         onClick={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/books'))}
-        className="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100"
+        className="inline-flex cursor-pointer items-center gap-2 py-2 text-sm font-medium text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100"
       >
         <ArrowLeft className="size-4" /> Kitoblarga qaytish
       </button>
 
-      <div className="mt-6 grid gap-8 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-12">
+      <div className="mt-4 grid gap-8 sm:mt-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-12">
         <Gallery book={book} />
 
-        <div>
+        <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
             {book.Janr && <Badge tone="indigo">{book.Janr}</Badge>}
             <Badge tone={book.sotuvdaBor ? 'green' : 'red'}>
@@ -163,10 +163,10 @@ export default function BookDetails() {
             </Badge>
           </div>
 
-          <h1 className="mt-4 font-display text-4xl leading-tight font-bold text-stone-900 dark:text-stone-100">
+          <h1 className="mt-4 font-display text-3xl leading-tight font-bold wrap-break-words text-stone-900 sm:text-4xl dark:text-stone-100">
             {book.nomi}
           </h1>
-          <p className="mt-2 text-lg text-stone-500 dark:text-stone-400">{book.muallifi}</p>
+          <p className="mt-2 text-lg wrap-break-words text-stone-500 dark:text-stone-400">{book.muallifi}</p>
 
           <p className="mt-6 text-3xl font-bold text-amber-600 dark:text-amber-400">
             {book.narxi != null ? `${Number(book.narxi).toLocaleString('uz-UZ')} so'm` : 'Narxi ko\'rsatilmagan'}
@@ -195,7 +195,9 @@ export default function BookDetails() {
           {book.tavsif && (
             <div className="mt-8 border-t border-stone-200 pt-6 dark:border-stone-800">
               <h2 className="text-xl font-bold text-stone-900 dark:text-stone-100">Kitob haqida</h2>
-              <p className="mt-3 leading-7 whitespace-pre-line text-stone-600 dark:text-stone-300">{book.tavsif}</p>
+              <p className="mt-3 leading-7 wrap-break-words whitespace-pre-line text-stone-600 dark:text-stone-300">
+                {book.tavsif}
+              </p>
             </div>
           )}
         </div>

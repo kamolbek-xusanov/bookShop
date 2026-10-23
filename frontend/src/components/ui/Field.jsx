@@ -2,7 +2,7 @@ import { useId } from 'react'
 import { cn } from '../../utils/cn'
 
 const inputClasses =
-  'w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-stone-900 placeholder:text-stone-400 dark:bg-stone-900 dark:text-stone-100 ' +
+  'w-full rounded-xl border bg-white px-3.5 py-2.5 text-base sm:text-sm text-stone-900 placeholder:text-stone-400 dark:bg-stone-900 dark:text-stone-100 ' +
   'transition outline-none focus:ring-4'
 
 function stateClasses(error) {
