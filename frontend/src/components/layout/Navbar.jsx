@@ -39,11 +39,10 @@ export default function Navbar() {
   return (
     <header className="sticky top-3 z-40 mx-auto mt-3 w-[calc(100%-1.5rem)] max-w-308 sm:top-4 sm:mt-4 sm:w-[calc(100%-3rem)]">
 
-      {/* floating pill */}
       <div
         className={cn(
           'border border-stone-300/80 bg-white/80 shadow-[0_10px_25px_-5px_rgba(28,25,23,0.1),0_14px_34px_-12px_rgba(245,158,11,0.55)] ring-1 ring-white/60 backdrop-blur-xl',
-          'dark:shadow-[0_10px_25px_-5px_rgba(0,0,0,0.6),0_14px_34px_-12px_rgba(245,158,11,0.35)] dark:ring-white/5',
+          'dark:border-white/10 dark:bg-stone-900/75 dark:shadow-[0_10px_25px_-5px_rgba(0,0,0,0.6),0_14px_34px_-12px_rgba(245,158,11,0.35)] dark:ring-white/5',
           open ? 'rounded-3xl lg:rounded-full' : 'rounded-full'
         )}
       >
